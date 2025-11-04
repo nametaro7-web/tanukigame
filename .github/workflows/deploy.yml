@@ -5,14 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'index.html'
-      - 'build*.data.gz'
-      - 'build*.framework.js'
-      - 'build*.loader.js'
-      - 'build*.wasm.gz'
-      - 'TemplateData/**'
-      - '*.mp4'
-
+      - '**' 
+      
   workflow_dispatch:
 
 jobs:
@@ -24,14 +18,23 @@ jobs:
 
       - name: Setup Build Folder
         run: |
+          # 必要なファイルを直接指定してコピー
           mkdir build_artifact
           cp index.html build_artifact
-          cp build* build_artifact || true
+          cp build2025110411041858.data.gz build_artifact || true
+          cp build2025110411041858.framework.js build_artifact || true
+          cp build2025110411041858.loader.js build_artifact || true
+          cp build2025110411041858.wasm.gz build_artifact || true
+          
+          # その他必要なアセット類
           cp -r TemplateData build_artifact/TemplateData || true
-          cp *.mp4 build_artifact || true
-          cp *.png build_artifact || true
+          cp result1_re.mp4 build_artifact || true
+          cp result2_re.mp4 build_artifact || true
+          
+          # その他、favicon.ico, pngファイルなどもコピー
           cp *.ico build_artifact || true
-          cp *.css build_artifact || true
+          cp *.png build_artifact || true
+          cp style.css build_artifact || true
           
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v2
