@@ -6,10 +6,9 @@ on:
     branches:
       - main
     paths:
-      - 'index.html'
-      - 'build/**'
-      - 'streamingassets/**'
-      - 'templatedata/**'
+      - '**' # 全ファイルを監視対象とする
+      
+  workflow_dispatch: # これが手動実行を可能にします
 
 jobs:
   build:
